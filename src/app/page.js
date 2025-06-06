@@ -5,6 +5,17 @@ import { useState, useEffect } from "react";
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
 
+  const scrollToSection = (e, sectionId) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
@@ -32,10 +43,10 @@ export default function Home() {
           </div>
           <nav className={`hidden md:flex space-x-8 transition-all duration-300 ease-in-out ${isScrolled ? 'text-bas8' : 'text-lg'
             }`}>
-            <a href="#home" className="hover:text-secondary transition-colors">Home</a>
-            <a href="#showcase" className="hover:text-secondary transition-colors">Showcase</a>
-            <a href="#location" className="hover:text-secondary transition-colors">Location</a>
-            <a href="#contact" className="hover:text-secondary transition-colors">Contact</a>
+            <a href="#home" onClick={(e) => scrollToSection(e, 'home')} className="hover:text-secondary transition-colors">Home</a>
+            <a href="/showcase" className="hover:text-secondary transition-colors">Showcase</a>
+            <a href="#location" onClick={(e) => scrollToSection(e, 'location')} className="hover:text-secondary transition-colors">Location</a>
+            <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className="hover:text-secondary transition-colors">Contact</a>
           </nav>
           {/* Mobile menu button */}
           <button className="md:hidden text-white">
@@ -61,7 +72,9 @@ export default function Home() {
                 At our workshop, we guarantee customer satisfaction with top-quality motorcycle lighting products that deliver superior performance and reliability every time.
               </p>
               <button className="bg-secondary px-8 py-3 rounded-lg font-semibold text-white hover:shadow-lg transition-all duration-300 transform hover:scale-105">
-                Explore Showcase
+                <a href="/showcase">
+                  Explore Showcase
+                </a>
               </button>
             </div>
           </div>
