@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 export default function ShowcasePage() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,11 +40,23 @@ export default function ShowcasePage() {
             <a href="/#contact" className="hover:text-secondary transition-colors">Contact</a>
           </nav>
           {/* Mobile menu button */}
-          <button className="md:hidden text-white">
+          <button 
+            className="md:hidden text-white"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
+        </div>
+        {/* Mobile Menu */}
+        <div className={`md:hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+          <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+            <a href="/" className="hover:text-secondary transition-colors">Home</a>
+            <a href="#" className="hover:text-secondary transition-colors">Showcase</a>
+            <a href="/#location" className="hover:text-secondary transition-colors">Location</a>
+            <a href="/#contact" className="hover:text-secondary transition-colors">Contact</a>
+          </nav>
         </div>
       </header>
 
